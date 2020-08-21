@@ -86,14 +86,14 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./src/hellow.js":
-/*!***********************!*\
-  !*** ./src/hellow.js ***!
-  \***********************/
+/***/ "./src/css/style.css":
+/*!***************************!*\
+  !*** ./src/css/style.css ***!
+  \***************************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-eval("console.log(\"hellow\");\r\n\r\n\r\nfunction func1() {\r\n    console.log(\"没用到的函数1\");\r\n}\r\n\r\nfunction func2() {\r\n    console.log(\"用到的函数\");\r\n}\r\n\r\nfunc2();\n\n//# sourceURL=webpack:///./src/hellow.js?");
+eval("// extracted by mini-css-extract-plugin\n\n//# sourceURL=webpack:///./src/css/style.css?");
 
 /***/ }),
 
@@ -104,29 +104,29 @@ eval("console.log(\"hellow\");\r\n\r\n\r\nfunction func1() {\r\n    console.log(
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("console.log(\"hellow this is the webpack entry\");\r\n__webpack_require__(/*! ./hellow.js */ \"./src/hellow.js\")\r\n__webpack_require__(/*! ./style.css */ \"./src/style.css\")\r\n__webpack_require__(/*! ./other.js */ \"./src/other.js\")\r\n\r\ndocument.getElementsByClassName('box')[0].className = \"green\";\r\nlet ele = document.createElement('div');\r\nele.className = \"red\"\r\ndocument.body.appendChild(ele);\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("console.log(\"hellow this is the webpack entry\");\r\n__webpack_require__(/*! ./js/hellow.js */ \"./src/js/hellow.js\")\r\n__webpack_require__(/*! ./css/style.css */ \"./src/css/style.css\")\r\n__webpack_require__(/*! ./js/other.js */ \"./src/js/other.js\")\r\n\r\n// document.getElementsByClassName('box')[0].className = \"box green\";\r\n// let ele = document.createElement('div');\r\n// ele.className = \"box red\"\r\n// document.body.appendChild(ele);\n\n//# sourceURL=webpack:///./src/index.js?");
 
 /***/ }),
 
-/***/ "./src/other.js":
-/*!**********************!*\
-  !*** ./src/other.js ***!
-  \**********************/
+/***/ "./src/js/hellow.js":
+/*!**************************!*\
+  !*** ./src/js/hellow.js ***!
+  \**************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("function func3() {\r\n    console.log('未用到3');\r\n}\r\nfunction func4() {\r\n    conosle.log(\"未用到4\");\r\n}\n\n//# sourceURL=webpack:///./src/other.js?");
+eval("console.log(\"hellow\");\r\n\r\n\r\nfunction func1() {\r\n    console.log(\"没用到的函数1\");\r\n}\r\n\r\nfunction func2() {\r\n    console.log(\"用到的函数\");\r\n}\r\n\r\nfunc2();\n\n//# sourceURL=webpack:///./src/js/hellow.js?");
 
 /***/ }),
 
-/***/ "./src/style.css":
-/*!***********************!*\
-  !*** ./src/style.css ***!
-  \***********************/
+/***/ "./src/js/other.js":
+/*!*************************!*\
+  !*** ./src/js/other.js ***!
+  \*************************/
 /*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-eval("// extracted by mini-css-extract-plugin\n\n//# sourceURL=webpack:///./src/style.css?");
+eval("function func3() {\r\n    console.log('未用到3');\r\n}\r\nfunction func4() {\r\n    conosle.log(\"未用到4\");\r\n}\n\n//# sourceURL=webpack:///./src/js/other.js?");
 
 /***/ })
 

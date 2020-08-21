@@ -5,6 +5,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');//PurifyCssPlugin
 const WebpackDeepScopeAnalysisPlugin = require("webpack-deep-scope-plugin").default;
 const PurifyCssPlugin = require('purifycss-webpack');
+const HtmlWithimgLoader = require("html-withimg-loader");
 module.exports = {
     entry: {
         index: './src/index.js'
@@ -16,14 +17,74 @@ module.exports = {
     module: {
         rules: [
             {
+                test: /\.(htm|html)$/,
+                loader: 'html-withimg-loader'
+            },
+            {
                 test: /\.css$/,
-                use: [{
-                    loader: MiniCssExtractPlugin.loader,//css文件单独抽离成一个文件,而不打包在js文件里面
-                    options: {
-                        publicPath: 'css/',//打包后css所在文件夹的名字
-                        chunkFilename: "[id].css" //????
+                use: [
+                    {
+                        loader: MiniCssExtractPlugin.loader,//css文件单独抽离成一个文件,而不打包在js文件里面
+                        options: {
+                            publicPath: 'css/',//打包后css所在文件夹的名字
+                            chunkFilename: "[id].css" //????
+                        }
+                    }, { loader: 'css-loader' },
+                    {
+                        loader: "postcss-loader",
+                        options: {
+                            ident: "postcss",
+                            plugins: [
+                                // require('postcss-cssnext')(),//已经包含了添加前缀的功能
+                                require('autoprefixer')(),//自动添加前缀,浏览器不兼容的样式
+                                require('cssnano')() //css压缩
+                            ]
+                        }
                     }
-                }, 'css-loader']
+                ]
+
+            },
+            {
+                test: /\.(jpg|png|gif|jpeg)$/,//处理html中引用的图片
+                use: [
+
+                    {
+                        loader: 'img-loader',//图片处理
+                        options: {
+                            plugins: [
+                                require('imagemin-mozjpeg')({
+                                    quality: 1, //图片的压缩比例,最大压缩比例,最小压缩比例,范围是0-100
+                                    smooth: 7 //平滑度
+                                })
+                            ],
+                        }
+                    }
+                ]
+            },
+            {
+                test: /\.html$/,
+                use: [
+                    {
+                        loader: 'html-loader',
+                        options: {
+                            attrs: ['img:src']//处理html中,引入式图片,html编译后会自动关联图片
+                        }
+                    }
+                ]
+            },
+            {
+                test: /\.(png|jpg|gif)$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: '[name].[ext]',
+                            outputPath: './img',
+                            publichPath: '../img/',
+                            esModule: false
+                        }
+                    }
+                ]
             }
         ]
     },
@@ -42,7 +103,7 @@ module.exports = {
         }),
         new HtmlWebpackPlugin({//打包html的插件
             filename: 'index.html',
-            template: './src/index.html' //打包html文件使用的模板
+            template: 'html-withimg-loader!' + path.resolve(__dirname, './src/index.html')  //打包html文件使用的模板
         }),
 
     ],
